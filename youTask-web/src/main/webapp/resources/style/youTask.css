@@ -1,0 +1,213 @@
+@CHARSET "UTF-8";
+
+html {
+	height: 100%;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 14px;
+}
+
+body {
+	background-color: #EFEFEF;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.header {
+	background: url('../resources/images/navigation_bg.png') no-repeat scroll left top transparent;
+	font-size: 16px;
+	height: 54px;
+	padding: 13px 18px;
+	position: relative;
+	color: white;
+}
+
+.headerLinkBox {
+	position: absolute;
+	font-size: 12px;
+	right: 200px;
+	top: 30px;
+}
+
+.headerMeyleLogo {
+	position: absolute;
+	right: 0px;
+	padding-right: 10px;
+}
+
+#header_form {
+	font-size: 12px;
+	width: 100%;
+	text-align: left;
+	padding-top: 10px;
+}
+
+#container {
+	width: 1032px;
+}
+
+#bg_content_margin_top {
+	background: url('../resources/images/branding_bg.png') no-repeat scroll
+		left top transparent;
+	width: 100%;
+	height: 4px;
+}
+
+#contentArea {
+	background: url('../resources/images/maincontent_bg.png') repeat-y
+		scroll left top transparent;
+	height: 100%;
+	min-height: 600px;
+	padding: 20px;
+	text-align: left;
+}
+
+#bg_content_margin_bottom {
+	background: url('../resources/images/maincontent_final_bg.png')
+		no-repeat scroll left top transparent;
+	width: 100%;
+	height: 9px;
+}
+
+#footer {
+	font-size: 12px;
+	color: #999999;
+	padding-left: 40px;
+	padding-top: 5px;
+	text-align: left;
+	width: 1032px;
+}
+
+#navigation_wrapper {
+	background: url('../resources/images/maincontent_bg.png') repeat-y scroll left top transparent;
+	width: 1032px;
+	height: 100%;
+}
+
+#navigation {
+	background-color: #EFEFEF;
+	width:1000px;	
+}
+
+#navigation ul {
+	padding: 0;
+	margin: 0;
+}
+
+.navigation a {
+	text-decoration: none;
+	color: black;
+	font-size: 0.9em;
+}
+
+.navigation li {
+	list-style: none;
+	height: 25px;
+	float: left;
+	padding-top: 8px;
+}
+
+#navigation li:hover {
+	background-color: #D6D6D6;
+	color: white;
+}
+
+#navigation li.selected {
+	background-color: white;
+}
+
+#navigation li.selected:hover {
+	color: black;
+	cursor: default;
+}
+
+.navigation li.item {
+	width: 150px;
+}
+
+.ui-input-invalid {
+	border-color:red !important;	
+}
+
+.clear {
+    float: none;
+    clear: both;
+}
+
+.right {
+  float: right;
+}
+
+.topAlignedWithMargin {
+	vertical-align: top;
+	margin-top: 3px;
+}
+
+.topAlignedColumn {
+	vertical-align: top;
+	width: 50%;
+}
+
+.horizontalGap {
+	margin-right: 10px;
+}
+
+.pageTitle {
+	padding-left: 15px;
+}
+
+ul.feedbackPanel {
+	list-style-type: none;
+	margin: 8px 0 10px 0;
+	padding: 4px 4px 4px 8px;
+	color: #990000;
+	background-color: #ffffeb;
+	border: 1px dotted #BAB3AE;
+}
+
+.articlePageLabel {
+	width: 150px;
+	display: inline-block;
+}
+
+.bonusPageLabel {
+	width: 150px;
+	display: inline-block;
+}
+
+.formRowGroup {
+	padding-top: 2px;
+	padding-bottom: 5px;
+}
+
+.formInput {
+	width: 200px;
+	margin-right: 5px;
+}
+
+.informationImage {
+	vertical-align: middle;
+}
+
+.buttonBox {
+	padding-left: 10px;
+	padding-right: 20px;
+	text-align: right;
+}
+
+.articleMessage {
+	color: red;
+	display: block;
+	padding-left: 150px;
+}
+
+.inputErrorMessage {
+	color: red;
+	display: block;
+	padding-left: 150px;
+}
+
+.disabledGroup {
+	color: gray;
+	cursor: default;
+}

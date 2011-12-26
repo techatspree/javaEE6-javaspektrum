@@ -1,0 +1,125 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<h:panelGrid columns="2" cellspacing="10" width="100%"
+		columnClasses="topAlignedColumn,topAlignedColumn">
+
+		<rich:panel id="articleLeftContainer">
+
+			<h:panelGroup layout="block" style="font-weight:bold;">
+				#{messages['devA.article.label']}
+			</h:panelGroup>
+			
+			<h:panelGroup id="meyleNumberBlock" layout="block" styleClass="formRowGroup disabledGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.meyleNo']}" /></label>
+				<h:inputText id="meyleNumberOutput" styleClass="formInput" disabled="true" 
+							 value="#{artikelAnlegenController.artikel.meyleNummer}" >
+					<f:converter converterId="nummerConverter" />
+				</h:inputText>
+			</h:panelGroup>
+
+			<h:panelGroup id="oeNoBlock" layout="block" styleClass="formRowGroup disabledGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.OENo']}" /></label>
+				<h:inputText id="oeNoOutput" styleClass="formInput" disabled="true" 
+							 value="#{artikelAnlegenController.artikel.oeNummer}" >
+					<f:converter converterId="nummerConverter" />
+				</h:inputText>
+			</h:panelGroup>
+
+			<h:panelGroup id="supplierNoBlock" layout="block" styleClass="formRowGroup disabledGroup">
+				<h:outputLabel for="supplierNoOutput" styleClass="articlePageLabel">
+					<h:outputText value="#{messages['devA.article.supplierNo']}" />
+				</h:outputLabel>
+				<h:inputText id="supplierNoOutput" styleClass="formInput" disabled="true"  
+							 value="#{artikelAnlegenController.artikel.lieferantenNummer}" >
+					<f:converter converterId="nummerConverter" />
+				</h:inputText>
+				
+			</h:panelGroup>
+
+		</rich:panel>
+
+		<rich:panel id="articleRightContainer">
+		
+			<h:panelGroup layout="block" style="font-weight:bold;">
+				#{messages['devA.article.pairRelationship.label']}
+			</h:panelGroup>
+			
+			
+			<h:panelGroup id="pairArticleMeyleNumberBlock" layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.meyleNo']}" /></label>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="pairArticleMeyleNumberInput" styleClass="formInput" value="#{artikelAnlegenController.pairArticleMeyleNummer}" 
+								 required="true" >
+						<f:converter converterId="nummerConverter" />
+					</h:inputText>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="pairArticleMeyleNoImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="pairArticleMeyleNoImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.meyleNo']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+
+	            <h:message for="meyleNumberInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="pairArticleOeNoBlock" layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.OENo']}" /></label>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="pairArticleOeNoInput" styleClass="formInput" value="#{artikelAnlegenController.pairArticleOeNummer}"
+								 required="true" >
+						<f:converter converterId="nummerConverter" />
+					</h:inputText>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="pairArticleOeNoBlockImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="pairArticleOeNoBlockImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.OENo']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+	            
+	            <h:message for="pairArticleOeNoInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="pairArticleSupplierNoBlock" layout="block" styleClass="formRowGroup">
+				<h:outputLabel for="pairArticleSupplierNoInput" styleClass="articlePageLabel">
+					<h:outputText value="#{messages['devA.article.supplierNo']}" />
+				</h:outputLabel>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="pairArticleSupplierNoInput" styleClass="formInput" value="#{artikelAnlegenController.pairArticleLieferantenNummer}" 
+								 required="true" >
+						<f:converter converterId="nummerConverter" />
+					</h:inputText>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="pairArticleSupplierNoImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="pairArticleSupplierNoImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.supplierNo']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+	            
+				<h:message for="pairArticleSupplierNoInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+		</rich:panel>
+
+	</h:panelGrid>
+
+</ui:composition>
+
