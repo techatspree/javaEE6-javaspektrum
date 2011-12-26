@@ -1,0 +1,3 @@
+project.jboss.home=/Users/mschuetz/Development/Projekte/youTask/jboss-as-7.0.2.Final
+project.jboss.test.home=${project.jboss.home}
+maven.repo.local=/Users/mschuetz/Development/Projekte/youTask/.m2/repository

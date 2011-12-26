@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="/WEB-INF/layout/main-template.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGroup layout="block">
+
+                <h:panelGroup layout="block" style="padding-bottom:5px;">
+
+                    <h:outputText value="#{messages['com.acme.youTask.home.categoryFilter.filter']}: "/>
+
+                    <h:selectOneMenu id="type" value="#{taskController.categoryFilter}"
+                                     valueChangeListener="#{taskController.filterChanged}">
+                        <f:selectItem itemValue="#{null}"
+                                      itemLabel="#{messages['com.acme.youTask.home.kategorieFileter.noSelection']}"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{categoryFilterTypes}" var="type"
+                                       itemValue="#{type}"/>
+                        <a4j:ajax event="valueChange" render="dataTable" execute="@this"/>
+                    </h:selectOneMenu>
+                </h:panelGroup>
+
+                <rich:dataTable id="dataTable" var="task" value="#{taskController.tasks}">
+
+                    <rich:column id="taskDoneColumn" width="150px">
+                        <f:facet name="header">
+                            <h:outputText
+                                    value="#{messages['com.acme.youTask.home.dataTable.header.done']}"/>
+                        </f:facet>
+                        <h:selectBooleanCheckbox value="#{task.finished}" disabled="true"/>
+                    </rich:column>
+
+                    <rich:column id="taskDescriptionColumn" width="150px">
+                        <f:facet name="header">
+                            <h:outputText
+                                    value="#{messages['com.acme.youTask.home.dataTable.header.description']}"/>
+                        </f:facet>
+                        <h:outputText value="#{task.label}"/>
+                    </rich:column>
+
+                    <rich:column id="taskCategoryColumn" width="150px">
+                        <f:facet name="header">
+                            <h:outputText
+                                    value="#{messages['com.acme.youTask.home.dataTable.header.category']}"/>
+                        </f:facet>
+                        <h:outputText value="#{messages[task.category.i18nDescriptionId]}"/>
+                    </rich:column>
+
+                </rich:dataTable>
+
+				<h:panelGroup style="padding-top:10px;" layout="block">
+                	<h:outputText value="#{messages['com.acme.youTask.home.create']}:" />
+				</h:panelGroup>
+				
+                <h:panelGroup layout="block">
+                    <h:inputText id="taskNameInput" label="#{messages['com.acme.youTask.home.description']}" value="#{taskController.task.label}"/>
+                    <h:selectOneMenu id="create_type" value="#{taskController.task.category}" >
+                        <f:selectItem itemValue="#{null}"
+                                      itemLabel="#{messages['com.acme.youTask.home.categoryFilter.noSelection']}"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{categoryFilterTypes}" var="type"
+                                       itemValue="#{type}"/>
+                       	<a4j:ajax event="change" immediate="true" render="createButton" />
+                    </h:selectOneMenu>
+                    <h:commandButton id="createButton" action="#{taskController.saveTask}" disabled="#{taskController.task.category == null}"
+                                     value="#{messages['com.acme.youTask.home.create']}"/>
+                </h:panelGroup>
+                
+                <h:panelGroup style="padding-top:3px;color:red;" layout="block">
+                	<h:message for="taskNameInput" showDetail="true" showSummary="false" />
+				</h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

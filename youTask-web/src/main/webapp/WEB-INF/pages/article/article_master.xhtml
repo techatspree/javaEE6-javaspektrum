@@ -1,0 +1,281 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<h:panelGrid columns="2" cellspacing="10" width="100%"
+		columnClasses="topAlignedColumn,topAlignedColumn">
+
+		<rich:panel id="articleLeftContainer">
+
+			<h:panelGroup layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.availableAtSupplier']}" /></label>
+				<h:selectBooleanCheckbox id="availableAtSupplierCheckbox" value="#{artikelAnlegenController.artikel.beimLieferantenVorhanden}" />
+			</h:panelGroup>
+			
+			<h:panelGroup id="meyleNoBlock" layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.meyleNo']}" /></label>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="meyleNumberInput" styleClass="formInput" value="#{artikelAnlegenController.artikel.meyleNummer}" 
+								 required="true" >
+						<f:converter converterId="nummerConverter" />
+					</h:inputText>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="meyleNoImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="meyleNoImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.meyleNo']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+		        			
+	            <h:message for="meyleNumberInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="oeNoBlock" layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.OENo']}" /></label>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="oeNoInput" styleClass="formInput" value="#{artikelAnlegenController.artikel.oeNummer}"
+								 required="true" >
+						<f:converter converterId="nummerConverter" />
+					</h:inputText>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="oeNoBlockImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="oeNoBlockImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.OENo']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+
+	            <h:message for="oeNoInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="supplierNoBlock" layout="block" styleClass="formRowGroup">
+				<h:outputLabel for="supplierNoInput" styleClass="articlePageLabel">
+					<h:outputText value="#{messages['devA.article.supplierNo']}" />
+				</h:outputLabel>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="supplierNoInput" styleClass="formInput" value="#{artikelAnlegenController.artikel.lieferantenNummer}"
+								 required="true" >
+						<f:converter converterId="nummerConverter" />
+					</h:inputText>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="supplierNoImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="supplierNoImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.supplierNo']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+
+				<h:message for="supplierNoInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="customerBlock" layout="block" styleClass="formRowGroup">
+			
+				<h:outputLabel styleClass="articlePageLabel" value="#{messages['devA.article.customer']}" for="kundeSelectMenu"/>
+
+				<div style="display:inline-block;" class="formInput">
+					<h:selectOneMenu id="kundeSelectMenu" value="#{artikelAnlegenController.artikel.kunde}"
+									 valueChangeListener="#{artikelAnlegenController.kundeChanged}" 
+									 hideNoSelectionOption="#{artikelAnlegenController.artikel.kunde != null}"
+	                                 converter="firmaConverter" styleClass="formInput"
+	                                 style="#{not component.valid ? 'border-color:red' : ''}">
+	                         	<f:selectItem itemLabel="#{messages['devA.selectOneMenu.noSelection']}" noSelectionOption="true" />
+	                    <f:selectItems value="#{artikelAnlegenController.kunden}" var="f" itemLabel="#{f.name}"/>
+	                    <a4j:ajax event="valueChange" render="supplierBlockWrapper kundeSelectMenu" />
+	                </h:selectOneMenu>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="customerImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="customerImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.customer']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+
+	            <h:message for="kundeSelectMenu" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="descritpionBlock" layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel"><h:outputText value="#{messages['devA.article.descritpion']}" /></label>
+				
+				<div style="display:inline-block;" class="formInput">
+					<h:inputText id="descritpionInput" styleClass="formInput" value="TODO Binding fehlt noch"
+								 required="true" />
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="descriptionImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="descriptionImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.descritpion']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+	            
+	            <h:message for="descritpionInput" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+
+			<h:panelGroup id="supplierBlockWrapper" layout="inine-block" >
+
+				<h:outputLabel styleClass="articlePageLabel" value="#{messages['devA.article.supplier']}" for="supplierSelectMenu"/>
+
+				<div style="display:inline-block;" class="formInput">
+					<h:selectOneMenu id="supplierSelectMenu" value="#{artikelAnlegenController.artikel.lieferant}"  
+									 valueChangeListener="#{artikelAnlegenController.lieferantChanged}"
+									 disabled="#{artikelAnlegenController.artikel.kunde == null}"
+									 hideNoSelectionOption="#{artikelAnlegenController.artikel.lieferant != null}"
+	                                 converter="firmaConverter" styleClass="formInput"
+	                                 style="#{not component.valid ? 'border-color:red' : ''}">
+	                    <f:selectItem itemLabel="#{messages['devA.selectOneMenu.noSelection']}" noSelectionOption="true" />
+	                    <f:selectItems value="#{artikelAnlegenController.lieferanten}" var="f" itemLabel="#{f.name}"/>
+	                    <a4j:ajax event="valueChange" render="supplierSelectMenu" />
+	                </h:selectOneMenu>
+				</div>
+				
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="supplierImage" >
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="supplierImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.supplier']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+
+				<h:message for="supplierSelectMenu" styleClass="articleMessage" showDetail="true" showSummary="false" />
+			</h:panelGroup>
+			
+			<h:panelGroup id="classificationBlock" layout="block" styleClass="formRowGroup">
+				<label class="articlePageLabel topAlignedWithMargin"><h:outputText value="#{messages['devA.article.classification']}" /></label>
+				<div style="display:inline-block;" class="formInput">
+					<h:selectOneRadio value="#{artikelAnlegenController.artikel.klassifikation}" layout="pageDirection" immediate="true" >
+						<f:converter converterId="klassifikationConverter" />
+						<f:selectItems value="#{artikelAnlegenController.klassifikationItems}" var="k" 
+										itemLabel="#{messages[k.i18nDescriptionId]}" />
+					</h:selectOneRadio>
+				</div>
+		
+				<!-- Info Image mit Tooltip -->
+				<h:panelGroup id="classificationImage" style="display:inline-block;margin-top:3px;vertical-align:top;">
+		            <h:graphicImage value="../../resources/images/information.png" styleClass="informationImage" />
+		            <rich:tooltip showEvent="click" layout="block" for="classificationImage" verticalOffset="-10">
+		                <span style="white-space:nowrap">#{messages['devA.article.tooltip.classification']}</span>
+		            </rich:tooltip>
+		        </h:panelGroup >
+
+			</h:panelGroup>
+
+		</rich:panel>
+
+		<h:panelGroup id="articleRightContainer">
+			<rich:panel>
+			
+				<h:panelGroup layout="block" style="font-weight:bold;">
+					#{messages['devA.article.mountingSide.headline']}
+				</h:panelGroup>
+				
+				<h:panelGrid columns="2" cellspacing="10" width="100%" >
+				
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="vorderachseCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.vorderAchse}" />
+	                        	<h:outputLabel for="vorderachseCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.frontAxle']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="hinterachseCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.hinterAchse}" />
+	                        	<h:outputLabel for="hinterachseCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.backAxle']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+					
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="linksCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.links}" >
+						<a4j:ajax event="click" render="commandBox pairRelationshipHintBoxWrapper @this"  />
+						</h:selectBooleanCheckbox>
+	                        	<h:outputLabel for="linksCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.left']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="rechtsCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.rechts}" >
+						<a4j:ajax event="click" render="commandBox pairRelationshipHintBoxWrapper @this"  />
+						</h:selectBooleanCheckbox>
+	                        	<h:outputLabel for="rechtsCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.right']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+					
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="obenCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.oben}" />
+	                        	<h:outputLabel for="obenCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.top']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="untenCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.unten}" />
+	                        	<h:outputLabel for="untenCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.bottom']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+					
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="vorneCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.vorne}" />
+	                        	<h:outputLabel for="vorneCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.ahead']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="hintenCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.hinten}" />
+	                        	<h:outputLabel for="hintenCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.behind']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+					
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="innenCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.innen}" />
+	                        	<h:outputLabel for="innenCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.inside']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:selectBooleanCheckbox id="aussenCheckbox" value="#{artikelAnlegenController.artikel.einbauseite.aussen}" />
+	                        	<h:outputLabel for="aussenCheckbox">
+	                          	<h:outputText value="#{messages['devA.article.mountingSide.outside']}" />
+	                         	</h:outputLabel>
+					</h:panelGroup>
+					
+				</h:panelGrid>
+				
+			</rich:panel>
+			
+			<h:panelGroup id="pairRelationshipHintBoxWrapper" layout="block" style="padding-top:10px;padding-left:10px;" >
+				<h:panelGroup id="pairRelationshipHintBox" rendered="#{artikelAnlegenController.paarbeziehungErforderlich}" >
+					<h:graphicImage id="exclamationImage" value="../../resources/images/exclamation.png" styleClass="informationImage" />
+		            	<h:outputLabel style="vertical-align:middle;">
+		               	<h:outputText value="#{messages['devA.article.mountingSide.article.pairMsg']}" />
+		              	</h:outputLabel>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+		
+	</h:panelGrid>
+
+</ui:composition>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<div class="header">
+		<div style="float:left;padding-top:5px;text-align:left;widht:800px;">
+			<h:form id="header_form">
+				<ui:fragment rendered="#{identity.loggedIn}">
+					<div>
+						#{messages['devA.header.loggedInAs']} #{identity.user.id}
+					</div>
+				</ui:fragment>
+			</h:form>
+		</div>
+
+		<div class="headerLinkBox">
+			<h:form id="login_form">
+				<ui:fragment rendered="#{identity.loggedIn}">
+					<span>
+					</span>
+				</ui:fragment>
+				<ui:fragment rendered="#{not identity.loggedIn}">
+					<span>
+					</span>
+				</ui:fragment>
+			</h:form>
+		</div>
+
+		<div class="headerMeyleLogo">
+			<!--<h:graphicImage value="/resources/images/meyle_logo.png" alt="devA" />      -->
+		</div>
+	</div>
+
+</ui:composition>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+
+	<ui:insert name="metadata" />
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>youTask</title>
+
+		<link type="text/css" rel="stylesheet"
+                  href="#{facesContext.externalContext.requestContextPath}/resources/style/richfaces.css"/>
+
+		<h:outputStylesheet library="style" name="youTask.css" />
+		<ui:insert name="head" />
+	</h:head>
+
+	<h:body>
+		<div align="center" style="height:100%;">
+			<div id="container">
+				<div id="header">
+					<ui:include src="header.xhtml" />
+				</div>
+				
+				<div id="bg_content_margin_top" />
+
+				<div id="navigation_wrapper">
+					<ui:include src="navigation.xhtml" />
+				</div>
+
+				<div id="contentArea">
+					<ui:insert name="content">Content</ui:insert>
+				</div>
+				
+				<div id="bg_content_margin_bottom" />
+
+				<div id="footer">
+					<ui:include src="footer.xhtml" />
+				</div>
+			</div>
+		</div>
+	</h:body>
+
+</f:view>
+</html>

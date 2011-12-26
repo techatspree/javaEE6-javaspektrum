@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>youTask</artifactId>
+    <groupId>com.acme</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>youTask-web</artifactId>
+  <packaging>war</packaging>
+  <name>youTask - Web Application Archive</name>
+
+  <properties>
+    <project.base.dir>${project.parent.basedir}</project.base.dir>
+  </properties>
+
+  <dependencies>
+
+    <!-- JEE 6 Spec -->
+    <dependency>
+      <groupId>org.jboss.spec</groupId>
+      <artifactId>jboss-javaee-6.0</artifactId>
+      <type>pom</type>
+    </dependency>
+
+    <!-- Meyle Dependencies -->
+    <dependency>
+      <groupId>com.acme</groupId>
+      <artifactId>youTask-business</artifactId>
+    </dependency>
+
+    <!-- JSF -->
+    <dependency>
+      <groupId>org.richfaces.ui</groupId>
+      <artifactId>richfaces-components-ui</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.richfaces.core</groupId>
+      <artifactId>richfaces-core-impl</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <finalName>youTask</finalName>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+
+    <!-- Per Default (Entwicklungsphase) ist dieses Profil aktiviert. Dieses Profil bindet das Bootstrap-Modul ein. -->
+    <profile>
+      <id>bootstrap_include</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.acme</groupId>
+          <artifactId>youTask-bootstrap</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- Um das Bootstrap-Modul vom WAR auszuschließen, muss an den Maven-Build eine System-Property übergeben werden. Der 
+      Aufruf muss wie folgt aussehen: $mvn package -Dbootstrap.exclude -->
+    <!-- http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
+    <profile>
+      <id>bootstrap_exclude</id>
+      <activation>
+        <property>
+          <name>bootstrap.exclude</name>
+        </property>
+      </activation>
+    </profile>
+
+  </profiles>
+
+
+</project>
