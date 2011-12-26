@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://jboss.org/schema/arquillian"
+  xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+  <container qualifier="jboss7" default="true">
+
+    <protocol type="jmx-as7">
+      <property name="executionType">REMOTE</property>
+    </protocol>
+
+    <configuration>
+      <!-- jbossHome wird in der pom.xml gesetzt. Dort wird die entsprechende Property aus build.properties ausgelesen -->
+      <!-- <property name="jbossHome">/usr/share/server/pathToJBoss</property> -->
+      <!-- Ist erforderlich für IDEA-Integration -->
+      <!-- Faster startup -->
+      <property name="javaVmArguments">-d32 -noverify</property>
+    </configuration>
+
+  </container>
+
+</arquillian>

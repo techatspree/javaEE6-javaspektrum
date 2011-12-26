@@ -1,0 +1,13 @@
+
+.evenRow {
+	background: #E1E8F6;
+}
+
+.oddRow {
+	background: #A1C1E6;
+}
+
+.rf-tab-hdr {
+	background-image: none;
+	background-color: maroon;
+}

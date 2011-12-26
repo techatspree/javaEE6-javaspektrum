@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl"
+		href="http://www-106.ibm.com/developerworks/xml/library/x-antxsl/examples/example2/ant2html.xsl"?>
+
+        <!-- TODO basedir -->
+<project name="youTask" default="build-clean" basedir="/Users/mschuetz/Development/Projekte/youTask/workspace/youTask/Implementierung/trunk">
+	<property file="${basedir}/build.properties" />
+
+	<property name="jboss.deploy.dir" location="${project.jboss.home}/standalone/deployments" />
+	<property name="project.name" value="youTask" />
+	<property name="warproject.dir" location="${basedir}/youTask-war" />
+	<property name="project.war.name" value="${project.name}.war" />
+
+	<property name="project.war.file" location="${warproject.dir}/target/${project.war.name}" />
+	<property name="project.war.dir" location="${warproject.dir}/src/main/webapp" />
+	<property name="project.resources.dir" location="${warproject.dir}/src/main/resources" />
+	<property name="messages.file" location="${project.resources.dir}/messages_de.properties" />
+	<property name="csv.file" location="${warproject.dir}/target/messages_de.csv" />
+	<property name="jboss.deploy.war" location="${jboss.deploy.dir}/${project.war.name}" />
+
+	<target name="build-clean" depends="unexplode, build, explode, trigger-deploy" description="Build and deploy clean WAR" />
+
+	<target name="build" description="Build WAR">
+		<exec executable="${executable.mvn}" failonerror="true">
+			<arg value="--offline" />
+			<arg value="-DskipTests" />
+			<arg value="clean" />
+			<arg value="install" />
+		</exec>
+	</target>
+
+	<target name="trigger-deploy" description="Trigger the deployment">
+		<touch file="${jboss.deploy.war}.dodeploy" />
+	</target>
+
+	<target name="update-war" description="Update web pages">
+		<copy todir="${jboss.deploy.war}" verbose="true">
+			<fileset dir="${project.war.dir}" />
+		</copy>
+
+		<copy todir="${jboss.deploy.war}/WEB-INF/classes" verbose="true">
+			<fileset dir="${project.resources.dir}" />
+		</copy>
+	</target>
+
+	<target name="unexplode" description="Delete the exploded WAR">
+		<delete failonerror="no" file="${jboss.deploy.war}.deployed" />
+		<touch file="${jboss.deploy.war}.undeploy" />
+
+		<delete failonerror="no" dir="${jboss.deploy.war}" />
+	</target>
+
+	<target name="explode" description="Deploy the exploded WAR">
+		<mkdir dir="${jboss.deploy.war}" />
+
+		<unzip dest="${jboss.deploy.war}" src="${project.war.file}" />
+	</target>
+
+	<target name="generate-csv-from-messages">
+		<delete file="${csv.file}" />
+
+		<copy tofile="${csv.file}" verbose="true">
+			<fileset file="${messages.file}" />
+			<filterchain>
+				<tokenfilter>
+					<containsstring contains="=" />
+
+					<replacestring from="=" to=";" />
+				</tokenfilter>
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="generate-messages-from-csv">
+		<copy tofile="${messages.file}" verbose="true">
+			<fileset file="${csv.file}" />
+
+			<filterchain>
+				<tokenfilter>
+					<containsstring contains=";" />
+
+					<replacestring from=";" to="=" />
+				</tokenfilter>
+				<escapeunicode />
+			</filterchain>
+		</copy>
+	</target>
+</project>

@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>youTask</artifactId>
+    <groupId>com.acme</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>youTask-business</artifactId>
+  <name>youTask - Business Logic</name>
+  <description>youTask business logic</description>
+
+  <properties>
+    <project.base.dir>${project.parent.basedir}</project.base.dir>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.jboss.spec</groupId>
+      <artifactId>jboss-javaee-6.0</artifactId>
+      <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.acme</groupId>
+      <artifactId>youTask-domain</artifactId>
+      <type>test-jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.acme</groupId>
+      <artifactId>youTask-dao</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.acme</groupId>
+      <artifactId>youTask-dao</artifactId>
+      <type>test-jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
+
+  </dependencies>
+
+</project>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:fragment rendered="#{identity.loggedIn}">
+		<div id="navigation">
+			<h:form id="navigationForm">
+				<div class="navigation">
+					<h:link outcome="/pages/article/article.xhtml">
+						
+						<li class="item #{navigationViewController.optionStyleNewArticle}">
+							<div class="text">#{messages['devA.menu.option.newArticle']}</div>
+						</li>
+					</h:link>
+					<h:link outcome="/pages/articlelist/articlelist.xhtml"
+						styleClass="selected">
+						<li
+							class="item  #{navigationViewController.optionStyleArticlelist}">
+							<div class="text">#{messages['devA.menu.option.myArticles']}</div>
+						</li>
+					</h:link>
+					<h:link outcome="/pages/components/components.xhtml">
+						<li
+							class="item #{navigationViewController.optionStyleMyComponents}">
+							<div class="text">#{messages['devA.menu.option.myComponents']}</div>
+						</li>
+					</h:link>
+					<h:link outcome="/pages/bonus/bonus.xhtml">
+						<li class="item #{navigationViewController.optionStyleBonus}">
+							<div class="text">#{messages['devA.menu.option.bonus']}</div>
+						</li>
+					</h:link>
+					<h:link outcome="/pages/evaluations/evaluations.xhtml">
+						<li
+							class="item #{navigationViewController.optionStyleEvaluations}">
+							<div class="text">#{messages['devA.menu.option.evaluations']}</div>
+						</li>
+					</h:link>
+					<h:link outcome="/pages/archive/archive.xhtml">
+						<li class="item #{navigationViewController.optionStyleArchive}">
+							<div class="text">#{messages['devA.menu.option.archive']}</div>
+						</li>
+					</h:link>
+				</div>
+				<div class="clear"></div>
+			</h:form>
+		</div>
+	</ui:fragment>
+
+</ui:composition>
